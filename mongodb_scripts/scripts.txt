@@ -1,0 +1,3 @@
+mongoexport -h ds055545.mlab.com:55545 -d footballgr -c greece -u username -p password -o "C:\Users\nmarmaridis.SLG\export.json"
+
+mongoimport -h localhost:27017 -d footballgr -c greece --file "C:\Users\nmarmaridis.SLG\export.json"

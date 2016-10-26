@@ -1,0 +1,41 @@
+<div class="container">
+    <h1>Football Matches</h1>
+</div>
+<div class="container">
+    <div class="row">
+        <form class="navbar-form navbar-left" role="search" action="/greece/search/filter" method="GET">
+            <div class="form-group">
+                <label for="home-team">Home Team</label>
+				<select id="home-team" name="homeTeam">
+                    <option value="">Please select</option>
+					{{# each data.teams}}
+                      <option value="{{{this}}}">{{{this}}}</option>
+					{{/each}}
+				</select>
+                <label for="away-team">Away Team</label>
+                <select id="away-team" name="awayTeam">
+                    <option value="">Please select</option>
+					{{# each data.teams}}
+                        <option value="{{{this}}}">{{{this}}}</option>
+					{{/each}}
+                </select>
+            </div>
+            <button type="submit" class="btn btn-default">Search</button>
+        </form>
+	</div>
+	<div class="row">
+        <div class="col-sm-8 col-md-9">
+            <h4 class="text-weight-normal">Showing {{ data.greece.results.length}} matches.</h4>
+			{{#if data.HomeTeam}}
+                <h4 class="text-weight-normal">Results for {{data.HomeTeam}} - {{data.AwayTeam}}.</h4>
+			{{/if}}
+            <div class="blog">
+				{{# each data.greece.results}}
+                    <div class="post">
+                        <h2><a href="{{greeceUrl _id}}">{{{HomeTeam}}} - {{{AwayTeam}}}</a></h2>
+                    </div>
+				{{/each}}
+            </div>
+        </div>
+    </div>
+</div>
