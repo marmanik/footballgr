@@ -17,4 +17,4 @@ mongoimport -d my-site -c greece --type csv --file "C:\Users\nmarmaridis.SLG\Dow
 
 mongoexport -d my-site -c greece -o "C:\Users\nmarmaridis.SLG\export01.json"
 
-mongoimport -d footballgr -c greece --file "C:\Users\nmarmaridis.SLG\export01.json"
+mongoimport -d footballgr -c greece --file "mongodb_scripts/export.json"
