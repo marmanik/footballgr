@@ -1,3 +1,20 @@
 mongoexport -h ds055545.mlab.com:55545 -d footballgr -c greece -u username -p password -o "C:\Users\nmarmaridis.SLG\export.json"
 
 mongoimport -h localhost:27017 -d footballgr -c greece --file "C:\Users\nmarmaridis.SLG\export.json"
+
+db.getCollection('greece').find({}).forEach(function(obj){
+        if (typeof(obj.Date)!='object') { //check if is not already a ISODate
+        var datePt = obj.Date.split('/'); //split the string dd/mm/YYYY
+        var dateEn = '20' + datePt[2] + '-' + datePt[1] + '-' + datePt[0]; // reorganize to YYYY-mm-dd
+
+       obj.Date = new ISODate(dateEn); // convert in ISODate
+       db.getCollection('greece').save(obj); //save and thats all
+    }
+});
+
+mongoimport -d my-site -c greece --type csv --file "C:\Users\nmarmaridis.SLG\Downloads\G1.csv" --headerline
+
+
+mongoexport -d my-site -c greece -o "C:\Users\nmarmaridis.SLG\export01.json"
+
+mongoimport -d footballgr -c greece --file "C:\Users\nmarmaridis.SLG\export01.json"
