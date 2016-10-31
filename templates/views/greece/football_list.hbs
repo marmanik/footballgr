@@ -20,26 +20,96 @@
 					{{/each}}
                 </select>
             </div>
+			<div class="form-group">
+                <label for="season">Away Team</label>
+                <select id="season" name="season">
+					<option value="">Please select</option>
+                    <option value="2015-2016">2015-2016</option>
+                    <option value="2014-2015">2014-2015</option>
+                    <option value="2013-2014">2013-2014</option>
+                    <option value="2012-2013">2012-2013</option>
+                    <option value="2011-2012">2011-2012</option>
+                    <option value="2010-2011">2010-2011</option>
+					<option value="2009-2010">2009-2010</option>
+                    <option value="2008-2009">2008-2009</option>
+                    <option value="2007-2008">2007-2008</option>
+                    <option value="2006-2007">2006-2007</option>
+                    <option value="2005-2006">2005-2006</option>
+                    <option value="2004-2005">2004-2005</option>
+                    <option value="2003-2004">2003-2004</option>
+                    <option value="2002-2003">2002-2003</option>
+                    <option value="2001-2002">2001-2002</option>
+                    <option value="2000-2001">2000-2001</option>
+                    <option value="1999-2000">1999-2000</option>
+                    <option value="1998-1999">1998-1999</option>
+                    <option value="1997-1998">1997-1998</option>
+                    <option value="1996-1997">1996-1997</option>
+                    <option value="1995-1996">1995-1996</option>
+                    <option value="1994-1995">1994-1995</option>
+                </select>
+			</div>
             <button type="submit" class="btn btn-default">Search</button>
         </form>
 	</div>
-	<div class="row">
-        <div class="col-sm-8 col-md-9">
-            <h4 class="text-weight-normal">Showing {{ data.greece.results.length}} matches.</h4>
-			{{#if data.HomeTeam}}
-                <h4 class="text-weight-normal">Results for {{data.HomeTeam}} - {{data.AwayTeam}}.</h4>
-			{{/if}}
-            <div class="blog">
-				{{# each data.greece.results}}
-                    <div class="post">
-                        <h2><a href="{{greeceUrl _id}}">{{{HomeTeam}}} - {{{AwayTeam}}}</a></h2>
-                    </div>
-				{{/each}}
-            </div>
+    <div>
+		{{#if data.HomeTeam}}
+            <h4 class="text-weight-normal">Results for {{data.HomeTeam}} - {{data.AwayTeam}}.</h4>
+		{{/if}}
+    </div>
+    <div class="row jumbotron">
+        <div class="col-md-10 col-md-offset-1">
+			<table id="results-dt">
+		<thead>
+			<tr>
+                <th>#</th>
+                <th>Date</th>
+                <th>Season</th>
+                <th>Game</th>
+                <th>League</th>
+                <th>Result</th>
+                <th>Full time</th>
+                <th>First half</th>
+			</tr>
+		</thead>
+        <tfoot>
+			<tr>
+				<th>#</th>
+				<th>Date</th>
+                <th>Season</th>
+				<th>Game</th>
+				<th>League</th>
+				<th>Result</th>
+				<th>Full time</th>
+				<th>First half</th>
+			</tr>
+        </tfoot>
+		<tbody>
+		{{# each data.greece.results}}
+			<tr>
+				<td>{{math @index "+" 1}}</td>
+                <td>{{date Date format='YYYY-MM-DD'}}</td>
+                <td>{{Season}}</td>
+                <td><a href="{{greeceUrl _id}}">{{HomeTeam}} - {{AwayTeam}}</a></td>
+                <td>{{division Div}}</td>
+                <td>{{FTR}}</td>
+                <td>{{FTHG}} - {{FTAG}}</td>
+                <td>{{HTHG}} - {{HTAG}}</td>
+			</tr>
+		{{/each}}
+		</tbody>
+	</table>
         </div>
-        <iframe id="tableFrame" src="http://www.tablesleague.com/iframe?width=520&height=395&font_name=Tahoma&position=1&font_size=12&team_link=0&link_color=404040&games=1&wins=1&draws=1&lost=1&goals=1&goals_against=1&gd=1&points=1&next=1&form=1&font_size=12&font_color=000000&bg_color=FFFFFF&header_font_color=FFFFFF&header_bg_color=1fb9e4&bg_col=1fb9e4&font_color_col=FFFFFF&highlight=e3e3e3&hover=fff6bf&league_header=1&league=l_198&team=&timezone=2&language=2&team_flags=0" width="520" height=395 frameborder="0" scrolling="no"></iframe>
+    </div>
+	<div class="row">
+        <div class="col-md-8 col-md-offset-3">
+        	<iframe id="tableFrame" src="http://www.tablesleague.com/iframe?width=520&height=395&font_name=Tahoma&position=1&font_size=12&team_link=0&link_color=404040&games=1&wins=1&draws=1&lost=1&goals=1&goals_against=1&gd=1&points=1&next=1&form=1&font_size=12&font_color=000000&bg_color=FFFFFF&header_font_color=FFFFFF&header_bg_color=1fb9e4&bg_col=1fb9e4&font_color_col=FFFFFF&highlight=e3e3e3&hover=fff6bf&league_header=1&league=l_198&team=&timezone=2&language=2&team_flags=0" width="520" height=395 frameborder="0" scrolling="no"></iframe>
+        </div>
     </div>
 </div>
+<script src="/js/jquery/jquery-1.11.3.min.js"></script>
 <script>
   //  $("#tableFrame").contents().find("body").find(".header").hide();
+  $(document).ready(function() {
+      $('#results-dt').DataTable();
+  } );
 </script>

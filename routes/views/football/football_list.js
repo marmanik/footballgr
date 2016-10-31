@@ -33,8 +33,6 @@ exports = module.exports = function(req, res) {
 			locals.data.greece = results;
 			next(err);
 		});
-
-		console.log(locals.data.greece);
 		
 	});
 

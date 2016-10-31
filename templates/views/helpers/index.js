@@ -329,7 +329,29 @@ module.exports = function () {
 	_helpers.underscoreFormat = function (obj, underscoreMethod) {
 		return obj._[underscoreMethod].format();
 	};
+	
+	//  *Usage example:*
+	//  `{{math '+' 1}}
+	_helpers.math = function(lvalue, operator, rvalue, options) {
+		lvalue = parseFloat(lvalue);
+		rvalue = parseFloat(rvalue);
 
+		return {
+			"+": lvalue + rvalue,
+			"-": lvalue - rvalue,
+			"*": lvalue * rvalue,
+			"/": lvalue / rvalue,
+			"%": lvalue % rvalue
+		}[operator];
+	};
 
+	//  *Usage example:*
+	//  `{{division Div}}
+	_helpers.division = function (div) {
+		if (div==="G1"){
+			return "Superleague";
+		}
+	};
+	
 	return _helpers;
 };

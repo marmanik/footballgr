@@ -25,6 +25,9 @@ GreekFootball.add({
 	FTHG: { type: Types.Number },
 	FTAG: { type: Types.Number },
 	FTR: { type: String },
+	HTHG: { type: Types.Number },
+	HTAG: { type: Types.Number },
+	HTR: { type: String },
 	Season: { type: String}
 });
 

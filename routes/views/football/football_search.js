@@ -11,7 +11,8 @@ exports = module.exports = function (req, res) {
 	// Set locals
 	locals.filters = {
 		HomeTeam: req.query.homeTeam,
-		AwayTeam: req.query.awayTeam
+		AwayTeam: req.query.awayTeam,
+		Season: req.query.season
 	};
 
 	locals.data = {
@@ -28,17 +29,24 @@ exports = module.exports = function (req, res) {
 
 	// Load the current product
 	view.on('init', function (next) {
-		console.log('search HomeTeam=' + locals.filters.HomeTeam);
-		console.log('search AwayTeam=' + locals.filters.AwayTeam);
 		locals.data.HomeTeam = locals.filters.HomeTeam;
 		locals.data.AwayTeam = locals.filters.AwayTeam;
-
+		locals.data.Season = locals.filters.Season;
+		
 		//search the full-text index
-		var q = keystone.list('GreekFootball').model.find({
-			"HomeTeam": locals.filters.HomeTeam,
-			"AwayTeam": locals.filters.AwayTeam
-		}).sort('-Date');
-
+		var queryVar = {};
+		if(locals.filters.HomeTeam!=""){
+			queryVar.HomeTeam = locals.filters.HomeTeam;
+		}
+		if(locals.filters.AwayTeam!=""){
+			queryVar.AwayTeam = locals.filters.AwayTeam;
+		}
+		if(locals.filters.Season!=""){
+			queryVar.Season = locals.filters.Season;
+		}
+		
+		var q = keystone.list('GreekFootball').model.find(queryVar).sort('-Date');
+		
 		q.exec(function (error, results) {
 			if (error) console.log(error);
 
