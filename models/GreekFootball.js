@@ -24,7 +24,7 @@ GreekFootball.add({
 	AwayTeam: { type: String,  index: true },
 	FTHG: { type: Types.Number },
 	FTAG: { type: Types.Number },
-	FTR: { type: Types.Number },
+	FTR: { type: String },
 	Season: { type: String}
 });
 

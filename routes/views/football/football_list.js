@@ -34,6 +34,8 @@ exports = module.exports = function(req, res) {
 			next(err);
 		});
 
+		console.log(locals.data.greece);
+		
 	});
 
 	// Render the view
