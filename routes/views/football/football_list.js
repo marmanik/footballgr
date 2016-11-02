@@ -12,12 +12,19 @@ exports = module.exports = function(req, res) {
 
 	locals.data = {
 		greece: [],
-		teams: []
+		teams: [],
+		seasons: []
 	};
 	
 	fs.readFile('routes/views/football/data/teams.json', 'utf8', function (err, data) {
 		if (err) throw err; // we'll not consider error handling for now
 		locals.data.teams = JSON.parse(data);
+	});
+
+
+	fs.readFile('routes/views/football/data/seasons.json', 'utf8', function (err, data) {
+		if (err) throw err; // we'll not consider error handling for now
+		locals.data.seasons = JSON.parse(data);
 	});
 	
 	// Load all GreekFootball
