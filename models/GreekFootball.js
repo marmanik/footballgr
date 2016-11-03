@@ -36,4 +36,3 @@ GreekFootball.schema.virtual('url').get(function() {
 });
 
 GreekFootball.register();
-
